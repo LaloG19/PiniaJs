@@ -1,6 +1,6 @@
 <script setup>
 import { ref,onMounted, watch } from 'vue';
-import { useUsers } from '../stores/example.js';
+import { useUsers } from '../stores/example.ts';
 import { useRoute } from 'vue-router';
 import router from '@/router';
 

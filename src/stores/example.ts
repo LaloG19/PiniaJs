@@ -1,11 +1,12 @@
 import axios from "axios";
 import { defineStore } from "pinia";
+import type { IStudent } from "../interfaces/IStudent.ts";
 const ruta = 'https://65f8b9c1df151452460ff611.mockapi.io/api/v1';
 
 export const useUsers = defineStore('Users',{
   state: () => ({
-    ListStudents: [],
-    Student: {},
+    ListStudents: [] as IStudent[],
+    Student: {} as IStudent,
   }),
   getters:{
     GetStudents(state){
@@ -28,11 +29,12 @@ export const useUsers = defineStore('Users',{
         console.log(error);
       }
     },
-    async buscarEstudiante(id){
+    async buscarEstudiante(id: string){
       try{
         const response = await axios.get(`${ruta}/users/${id}`);
         if(response.status === 200){
           this.Student = response.data;
+          return true;
         }
         else{
           throw new Error('Error al cargar el estudiante');
@@ -42,7 +44,7 @@ export const useUsers = defineStore('Users',{
         return false;
       }
     },
-    async agregarEstudiante(data){
+    async agregarEstudiante(data: IStudent){
       try{
         const response = await axios.post(`${ruta}/users`,data);
         if(response.status === 201){
@@ -54,7 +56,7 @@ export const useUsers = defineStore('Users',{
         console.log(error);
       }
     },
-    async borrarEstudiante(id){
+    async borrarEstudiante(id: string){
       try{
         const response = await axios.delete(`${ruta}/users/${id}`);
         if(response.status === 200){

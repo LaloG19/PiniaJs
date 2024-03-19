@@ -1,6 +1,6 @@
 <script setup>
 import { ref,onMounted, watch, computed } from 'vue';
-import { useUsers } from '../stores/example.js';
+import { useUsers } from '../stores/example.ts';
 import router from '@/router';
 
 const store = useUsers();
